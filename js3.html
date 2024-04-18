@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(110, 248, 248);
+        }
+        h1{
+            text-decoration: underline;
+        }
+        button{
+            background-color: rgba(145, 95, 160, 0.613);
+            border: 2px solid rgb(52, 52, 51);
+            margin: 10px;
+        }
+        button:hover{
+            background-color: rgba(137, 43, 226, 0.699);
+        }
+        div{
+            height: 450px;
+            background-color:aliceblue;
+            border: 4px solid red;
+        }
+        img{
+            animation: ball 1.5s linear infinite;
+            position: relative;
+            top: 45%;
+        }
+        @keyframes ball {
+            from{
+                transform: rotate(0);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Ball Game</h1>
+    <button onclick="f1()">Football</button>
+    <button onclick="f2()">Tennis ball</button> 
+    <button onclick="f3()">Beach ball</button>
+    <button onclick="f4()">start</button>
+    <button onclick="f5()">stop</button>
+    <button onclick="f6()">restart</button>
+    <div id="box">
+        <img id="ball" src="./icons8-beach-ball-48.png" alt="">
+    </div>
+</body>
+
+
+
+
+<script>
+    var ball= document.getElementById("ball");
+    var x=0;
+    var y=200;
+    var i;
+    var w = window.innerWidth-84;
+    var h = window.innerHeight-180;
+
+    function f1(){
+        ball.src = "icons8-soccer-ball-48.png";
+    }
+    function f2(){
+        ball.src = "icons8-tennis-ball-48.png";
+    }
+    function f3(){
+        ball.src = "icons8-beach-ball-48.png";
+    }
+    function f4(){
+    clearInterval(i);
+    i=setInterval(()=>{
+        if(x<w && y<h){
+            x+=0.8;
+            y+=0.3;
+            ball.style.top= y +"px";
+            ball.style.left = x +"px";
+        }
+        else if(x<w && y>=h){
+            clearInterval(i);
+            i = setInterval(()=>{
+                if(x<w){
+                    x+=0.8;
+                    y-=0.3;
+                    ball.style.top= y +"px";
+                    ball.style.left = x +"px";   
+                }
+                else if(x>=w && y>=0){
+                    clearInterval(i);
+                    i=setInterval(()=>{
+                    if(y>=0){
+                    x-=0.8;
+                    y-=0.3;
+                    ball.style.top= y +"px";
+                    ball.style.left = x +"px"; 
+                }
+                else{
+                    clearInterval(i)
+                    i=setInterval(() => {
+                        if(x>=0){
+                             x-=0.8;
+                             y+=0.3;
+                             ball.style.top= y +"px";
+                             ball.style.left = x +"px";
+                        }
+                    },1);
+                }
+            },1)
+        }
+            },1)
+        }
+        else{
+            clearInterval(i);
+        }
+    },1)
+}
+function f5(){
+    clearInterval(i);
+}
+function f6(){
+    clearInterval(i);
+    x=0;
+    y=200;
+    ball.style.top= y +"px";
+    ball.style.left = x +"px";
+}
+</script>
+
+
+</html>
